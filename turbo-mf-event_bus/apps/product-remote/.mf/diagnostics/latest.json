@@ -1,0 +1,10 @@
+{
+  "latestErrorEvent": {
+    "code": "TYPE-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"/home/shawn/.vite-plus/js_runtime/node/24.19.0/bin/node /home/shawn/Documents/MicroFrontend/mf-monorepo/node_modules/.pnpm/typescript@6.0.3/node_modules/typescript/bin/tsc --project /home/shawn/Documents/MicroFrontend/mf-monorepo/apps/product-remote/node_modules/.federation/tsconfig.d42a040e630201f98daff7403dea54ad.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "args": {
+      "cmd": "/home/shawn/.vite-plus/js_runtime/node/24.19.0/bin/node /home/shawn/Documents/MicroFrontend/mf-monorepo/node_modules/.pnpm/typescript@6.0.3/node_modules/typescript/bin/tsc --project /home/shawn/Documents/MicroFrontend/mf-monorepo/apps/product-remote/node_modules/.federation/tsconfig.d42a040e630201f98daff7403dea54ad.json"
+    },
+    "timestamp": 1786000812167
+  }
+}
