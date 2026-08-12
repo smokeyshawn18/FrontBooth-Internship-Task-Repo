@@ -1,4 +1,4 @@
-import { AuthForm } from "../../auth/components/AuthForm";
+import { AuthForm } from "../../test/components/ReactHookForm";
 
 export function Users() {
   return (
