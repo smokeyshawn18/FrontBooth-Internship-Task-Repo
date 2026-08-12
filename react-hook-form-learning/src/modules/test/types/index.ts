@@ -4,3 +4,5 @@ export interface FormValues {
   age: number;
   password: string;
 }
+
+export type FormErrors = Partial<Record<keyof FormValues, string>>;
