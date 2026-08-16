@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Users } from "./modules/user/components/Users";
+
 import { SignUpForm } from "./modules/test/components/ManualForm";
+import { AuthFormRHF } from "./modules/auth/components/ValidatedForm";
+
 function App() {
   // Create a query client instance
   const queryClient = new QueryClient();
@@ -9,7 +11,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div>
         {/* React Hook Form */}
-        <Users />
+        <AuthFormRHF />
       </div>
       <div>
         {/* React State Form */}
