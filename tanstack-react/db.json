@@ -1,0 +1,23 @@
+{
+  "posts": [
+    {
+      "userId": 1,
+      "title": "tony",
+      "body": "kjiojhihidd",
+      "id": "ibntgQtybSs"
+    },
+    {
+      "userId": 59,
+      "title": "llllllllll",
+      "body": "llllllllllllllll",
+      "id": "w7wJJ85M0X4"
+    },
+    {
+      "userId": 1,
+      "title": "jhoi ",
+      "body": "thois os  a [pst",
+      "id": "-1d21IbnxBA"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
