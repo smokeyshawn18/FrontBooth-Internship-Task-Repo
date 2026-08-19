@@ -5,6 +5,8 @@ import { postApi } from "../service/post.api";
 import { message } from "antd";
 
 import type { CreatePostDto } from "../schema/post.schema";
+import { snapshotAndCancel } from "../service/optimistic";
+import type { Post } from "../types";
 
 export const usePostsQuery = (enabled = true) => {
   return useQuery({
@@ -42,21 +44,33 @@ export const useUpdatePostMutation = () => {
     mutationFn: ({ id, data }: { id: string; data: CreatePostDto }) =>
       postApi.updatePost(id, data),
 
-    onSuccess: (_, { id }) => {
-      message.success("Post updated successfully");
+    onMutate: async ({ id, data }) => {
+      const keys = [postQueryKeys.lists(), postQueryKeys.detail(id)];
+      const { rollback } = await snapshotAndCancel(queryClient, keys);
 
-      queryClient.invalidateQueries({
-        queryKey: postQueryKeys.all,
-      });
+      queryClient.setQueryData(postQueryKeys.lists(), (old: any) =>
+        old?.map((post: Post) =>
+          post.id === id ? { ...post, ...data } : post,
+        ),
+      );
+      queryClient.setQueryData(postQueryKeys.detail(id), (old: any) =>
+        old ? { ...old, ...data } : old,
+      );
 
-      queryClient.invalidateQueries({
-        queryKey: postQueryKeys.detail(id),
-      });
+      return { rollback };
     },
 
-    onError: (error) => {
+    onError: (error, _vars, context) => {
       message.error("Failed to update post");
       console.error(error);
+      context?.rollback();
+    },
+
+    onSuccess: () => message.success("Post updated successfully"),
+
+    onSettled: (_data, _err, { id }) => {
+      queryClient.invalidateQueries({ queryKey: postQueryKeys.all });
+      queryClient.invalidateQueries({ queryKey: postQueryKeys.detail(id) });
     },
   });
 };
@@ -67,17 +81,28 @@ export const useDeletePostMutation = () => {
   return useMutation({
     mutationFn: (id: string) => postApi.deletePost(id),
 
-    onSuccess: () => {
-      message.success("Post deleted successfully");
+    onMutate: async (id) => {
+      const { rollback } = await snapshotAndCancel(queryClient, [
+        postQueryKeys.lists(),
+      ]);
 
-      queryClient.invalidateQueries({
-        queryKey: postQueryKeys.all,
-      });
+      queryClient.setQueryData(postQueryKeys.lists(), (old: any) =>
+        old?.filter((post: Post) => post.id !== id),
+      );
+
+      return { rollback };
     },
 
-    onError: (error) => {
+    onError: (error, _id, context) => {
       message.error("Failed to delete post");
       console.error(error);
+      context?.rollback();
+    },
+
+    onSuccess: () => message.success("Post deleted successfully"),
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: postQueryKeys.all });
     },
   });
 };
