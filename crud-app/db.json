@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "name": "slukk",
+      "price": 20,
+      "category": "Mobile Accesories",
+      "inStock": true,
+      "id": "dNBoYH7"
+    },
+    {
+      "name": "slukky",
+      "price": 100,
+      "category": "Furniture",
+      "inStock": true,
+      "id": "8yCvxxk"
+    },
+    {
+      "name": "slukky",
+      "price": 500,
+      "category": "Mobile Accesories",
+      "inStock": true,
+      "id": "3O8qeFT"
+    },
+    {
+      "name": "ll",
+      "price": 0,
+      "category": "Mobile Accesories",
+      "inStock": true,
+      "id": "ZowIH3z"
+    },
+    {
+      "name": "sluk",
+      "price": 600,
+      "category": "Electronics",
+      "inStock": true,
+      "id": "fpb7MA2"
+    }
+  ]
+}
